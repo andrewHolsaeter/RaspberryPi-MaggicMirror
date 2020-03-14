@@ -9,12 +9,20 @@ def printState(btn):
 def toggleLED(led):
  led.toggle()
 
-btn = Button(29)
-led = LED(11)
+btnGreen = Button(29)
+btnRed = Button(31)
+btns = [btnGreen, btnRed]
 
-btn.subscribe(toggleLED, led)
-btn.subscribe(printState, btn)
+ledGreen = LED(11)
+ledRed = LED(13)
+
+btnGreen.subscribe(toggleLED, ledGreen)
+btnRed.subscribe(toggleLED, ledRed)
+
+btnGreen.subscribe(printState, btnGreen)
+btnRed.subscribe(printState, btnRed)
 
 while(True):
- btn.read()
+ for btn in btns:
+  btn.read()
  time.sleep(0.2)
