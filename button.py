@@ -12,6 +12,7 @@ class Button():
   self.pin = pin
   self.callbacks = []
   self.previous_state = GPIO.LOW
+  self.button_presses = 0
 
  def subscribe(self, callback, *args):
   """
@@ -34,6 +35,8 @@ class Button():
   state = GPIO.input(self.pin)
 
   if (state != self.previous_state):
+   # Update state here so callback functions can access "current state"
+   self.previous_state = state
    if (state == GPIO.HIGH):
+    self.button_presses +=1
     self.call()
-   self.previous_state == state

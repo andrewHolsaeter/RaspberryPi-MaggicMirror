@@ -2,14 +2,11 @@ import time
 import RPi.GPIO as GPIO
 from button import Button
 
-def printOut(*args):
- print("Pressed")
- for arg in args:
-  print("\t", arg)
+def printState(btn):
+ print(btn.button_presses)
 
 btn = Button(29)
-btn.subscribe(printOut, "One arg")
-btn.subscribe(printOut, "Two Args", "arg2")
+btn.subscribe(printState, btn)
 
 while(True):
  btn.read()
