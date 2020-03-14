@@ -4,13 +4,13 @@ from button import Button
 from led import LED
 
 def printState(btn):
- print(btn.button_presses)
+ print("{} pressed {} times".format(btn.name, btn.button_presses))
 
 def toggleLED(led):
  led.toggle()
 
-btnGreen = Button(29)
-btnRed = Button(31)
+btnGreen = Button(29, "Green")
+btnRed = Button(31, "Red")
 btns = [btnGreen, btnRed]
 
 ledGreen = LED(11)

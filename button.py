@@ -4,12 +4,13 @@ GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
 
 class Button():
- def __init__(self, pin):
+ def __init__(self, pin, name="unknown"):
   """
   Takes a pin number and function to call on depress (currently on HIGH)
   """
   GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set input pin # and set initial value
   self.pin = pin
+  self.name = name
   self.callbacks = []
   self.previous_state = GPIO.LOW
   self.button_presses = 0
