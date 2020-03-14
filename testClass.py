@@ -1,10 +1,29 @@
 import time
+import subprocess
 import RPi.GPIO as GPIO
 from button import Button
 from led import LED
 
-def printState(btn):
- print("{} pressed {} times".format(btn.name, btn.button_presses))
+def toggleMirror(led):
+ # previous state is technically current state here
+ state = led.previous_state
+ if state == GPIO.HIGH:
+  print("Starting mirror")
+  subprocess.run(['/home/pi/mmhelper.sh', 'start'])
+ else:
+  print("Stopping mirror")
+  subprocess.run(['/home/pi/mmhelper.sh', 'stop'])
+
+def printState(btn, led):
+ # previous state is technically current state here
+ state = btn.previous_state
+ if state == GPIO.HIGH:
+  # LED
+  print("High")
+ else:
+  print("Low")
+ #os.system("python3 hello.py")
+ #print("{} pressed {} times".format(btn.name, btn.button_presses))
 
 def toggleLED(led):
  led.toggle()
@@ -17,10 +36,10 @@ ledGreen = LED(11)
 ledRed = LED(13)
 
 btnGreen.subscribe(toggleLED, ledGreen)
-btnRed.subscribe(toggleLED, ledRed)
+btnGreen.subscribe(toggleMirror, ledGreen)
 
-btnGreen.subscribe(printState, btnGreen)
-btnRed.subscribe(printState, btnRed)
+btnRed.subscribe(toggleLED, ledRed)
+btnRed.subscribe(printState, btnRed, ledRed)
 
 while(True):
  for btn in btns:
