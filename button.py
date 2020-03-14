@@ -37,6 +37,6 @@ class Button():
   if (state != self.previous_state):
    # Update state here so callback functions can access "current state"
    self.previous_state = state
-   if (state == GPIO.HIGH):
+   if (state == GPIO.LOW):
     self.button_presses +=1
     self.call()
