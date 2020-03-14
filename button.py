@@ -13,12 +13,22 @@ class Button():
   self.callbacks = []
   self.previous_state = GPIO.LOW
 
- def subscribe(self, callback):
-  self.callbacks.append(callback)
+ def subscribe(self, callback, *args):
+  """
+  Takes a function and optional args to call when btn pressed
+  """
+  self.callbacks.append((callback, args))
 
  def call(self):
+  """
+  Calls every callback function with args for a btn
+  Callbacks should be a list of tuples w/ each instance(func, [args])
+  """
   for cb in self.callbacks:
-   cb()
+   if len(cb[1]) > 0:
+    cb[0](*cb[1])
+   else:
+    cb[0]()
 
  def read(self):
   state = GPIO.input(self.pin)
