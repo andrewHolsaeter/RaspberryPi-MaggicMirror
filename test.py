@@ -7,10 +7,10 @@ GPIO.setup(29, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input 
 GPIO.setup(11, GPIO.OUT)
 
 while True: # Run forever
-    if GPIO.input(29) == GPIO.HIGH:
-	GPIO.output(11, GPIO.HIGH)
-        print("Button was pushed!")
-    else:
-	GPIO.output(11, GPIO.LOW)
+ if GPIO.input(29) == GPIO.HIGH:
+  GPIO.output(11, GPIO.HIGH)
+  print("Button was pushed!")
+ else:
+  GPIO.output(11, GPIO.LOW)
 
-    time.sleep(0.1)
+ time.sleep(0.1)
