@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
+import sys
 import time
 import subprocess
-import atexit
+import signal
 import RPi.GPIO as GPIO
 from button import Button
 from led import LED
@@ -29,9 +30,11 @@ def printState(btn, led):
 def toggleLED(led):
  led.toggle()
 
-def shutdown():
+def shutdown(*args):
+ print("Shutting down...", args)
  for led in leds:
   led.turn_off()
+ sys.exit(0)
 
 def loop():
  print("Starting up app..")
@@ -61,6 +64,8 @@ if __name__ == '__main__':
  # Turn on LED to show we are running
  ledGreen.turn_on()
  # Register led turn off at exit to show we aren't running
- atexit.register(shutdown)
+ # SIGTERM = when killed? SIGINT is sent when ctrl-c is pressed
+ signal.signal(signal.SIGTERM, shutdown)
+ signal.signal(signal.SIGINT, shutdown)
 
  loop()
