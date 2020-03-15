@@ -25,8 +25,6 @@ def printState(btn, led):
   print("High")
  else:
   print("Low")
- #os.system("python3 hello.py")
- #print("{} pressed {} times".format(btn.name, btn.button_presses))
 
 def toggleLED(led):
  led.toggle()
@@ -46,11 +44,12 @@ btnYellow.subscribe(toggleMirror, ledYellow)
 btnRed.subscribe(toggleLED, ledRed)
 btnRed.subscribe(printState, btnRed, ledRed)
 
-atexit.register(ledGreen.turn_off)
-
 print("Starting up app..")
+
 # Turn on LED to show we are running
 ledGreen.turn_on()
+# Register led turn off at exit to show we aren't running
+atexit.register(ledGreen.turn_off
 
 while(True):
  for btn in btns:
