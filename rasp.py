@@ -2,6 +2,7 @@
 
 import time
 import subprocess
+import atexit
 import RPi.GPIO as GPIO
 from button import Button
 from led import LED
@@ -30,20 +31,27 @@ def printState(btn, led):
 def toggleLED(led):
  led.toggle()
 
-btnGreen = Button(29, "Green")
+btnYellow = Button(29, "Yellow")
 btnRed = Button(31, "Red")
-btns = [btnGreen, btnRed]
+btns = [btnYellow, btnRed]
 
 ledGreen = LED(11)
-ledRed = LED(13)
+ledYellow = LED(13)
+ledRed = LED(15)
+leds = [ledGreen, ledYellow, ledRed]
 
-btnGreen.subscribe(toggleLED, ledGreen)
-btnGreen.subscribe(toggleMirror, ledGreen)
+btnYellow.subscribe(toggleLED, ledYellow)
+btnYellow.subscribe(toggleMirror, ledYellow)
 
 btnRed.subscribe(toggleLED, ledRed)
 btnRed.subscribe(printState, btnRed, ledRed)
 
+atexit.register(ledGreen.turn_off)
+
 print("Starting up app..")
+# Turn on LED to show we are running
+ledGreen.turn_on()
+
 while(True):
  for btn in btns:
   btn.read()
