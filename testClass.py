@@ -41,6 +41,7 @@ btnGreen.subscribe(toggleMirror, ledGreen)
 btnRed.subscribe(toggleLED, ledRed)
 btnRed.subscribe(printState, btnRed, ledRed)
 
+print("Starting up app..")
 while(True):
  for btn in btns:
   btn.read()
