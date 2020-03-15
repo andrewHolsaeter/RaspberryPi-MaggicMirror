@@ -2,7 +2,7 @@
 ## Requirements
 1) Need to have both a mm.sh and mmhelper.sh file located in `/home/pi/`
 Can almost directly from https://forum.magicmirror.builders/topic/5831/quit-mm-with-script/2
-but may need to change file mm.sh to full path
+but may need to change file mm.sh to full path (see `./backups/` for copies)
 2) Change button/led pin #'s accordinly in rasp.py
 
 ## To run in background
