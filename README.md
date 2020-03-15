@@ -8,6 +8,8 @@ but may need to change file mm.sh to full path
 ## To run in background
 Run `nohup /home/pi/Documents/code/rasp.py &`
 ## To kill
-Find PID by running `ps ax | grep rasp.py`
-Then run `kill <PID>`
+TODO / Problem: When killing it this way, atexit functions don't call
+i.e. LED doesn't turn off 
+1) Find PID by running `ps ax | grep rasp.py`
+2) Then run `kill <PID>`
 
