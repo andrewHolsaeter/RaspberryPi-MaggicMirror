@@ -9,6 +9,14 @@ class LED():
   GPIO.output(self.pin, GPIO.LOW)
   self.previous_state = GPIO.LOW
 
+ def turn_on(self):
+  GPIO.output(self.pin, GPIO.HIGH)
+  self.previous_state = GPIO.HIGH
+
+ def turn_off(self):
+  GPIO.output(self.pin, GPIO.LOW)
+  GPIO.previous_state = GPIO.LOW
+
  def toggle(self):
   if self.previous_state == GPIO.LOW:
    GPIO.output(self.pin, GPIO.HIGH)
