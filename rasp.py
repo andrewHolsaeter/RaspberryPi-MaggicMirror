@@ -19,12 +19,12 @@ def toggleMirror(led):
 
 def printState(btn, led):
  # previous state is technically current state here
- state = btn.previous_state
+ state = led.previous_state
  if state == GPIO.HIGH:
   # LED
-  print("High")
+  print(led.name, "on")
  else:
-  print("Low")
+  print(led.name, "off")
 
 def toggleLED(led):
  led.toggle()
@@ -46,9 +46,9 @@ btnYellow = Button(29, "Yellow")
 btnRed = Button(31, "Red")
 btns = [btnYellow, btnRed]
 
-ledGreen = LED(11)
-ledYellow = LED(13)
-ledRed = LED(15)
+ledGreen = LED(11, "Green")
+ledYellow = LED(13, "Yellow")
+ledRed = LED(15, "Red")
 leds = [ledGreen, ledYellow, ledRed]
 
 btnYellow.subscribe(toggleLED, ledYellow)

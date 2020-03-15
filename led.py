@@ -3,9 +3,10 @@ GPIO.setwarnings(False) # Ignore warning for now
 GPIO.setmode(GPIO.BOARD) # Use physical pin numberi$
 
 class LED():
- def __init__(self, pin):
+ def __init__(self, pin, name="unknown"):
   GPIO.setup(pin, GPIO.OUT)
   self.pin = pin
+  self.name = name
   GPIO.output(self.pin, GPIO.LOW)
   self.previous_state = GPIO.LOW
 
