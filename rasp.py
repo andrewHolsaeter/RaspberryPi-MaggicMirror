@@ -29,6 +29,19 @@ def printState(btn, led):
 def toggleLED(led):
  led.toggle()
 
+def shutdown():
+ for led in leds:
+  led.turn_off()
+
+def loop():
+ print("Starting up app..")
+
+ while(True):
+  for btn in btns:
+   btn.read()
+
+  time.sleep(0.2)
+
 btnYellow = Button(29, "Yellow")
 btnRed = Button(31, "Red")
 btns = [btnYellow, btnRed]
@@ -44,14 +57,10 @@ btnYellow.subscribe(toggleMirror, ledYellow)
 btnRed.subscribe(toggleLED, ledRed)
 btnRed.subscribe(printState, btnRed, ledRed)
 
-print("Starting up app..")
+if __name__ == '__main__':
+ # Turn on LED to show we are running
+ ledGreen.turn_on()
+ # Register led turn off at exit to show we aren't running
+ atexit.register(shutdown)
 
-# Turn on LED to show we are running
-ledGreen.turn_on()
-# Register led turn off at exit to show we aren't running
-atexit.register(ledGreen.turn_off
-
-while(True):
- for btn in btns:
-  btn.read()
- time.sleep(0.2)
+ loop()
