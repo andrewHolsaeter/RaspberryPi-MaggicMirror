@@ -12,3 +12,7 @@ Run `nohup /home/pi/Documents/code/rasp.py &`
 1) Find PID by running `ps ax | grep rasp.py`
 2) Then run `kill <PID>`
 
+## Run the script on boot
+1) `sudo /etc/rc.local`
+2) Add `nohup /home/pi/Documents/code/rasp.py &` above `exit 0`
+
